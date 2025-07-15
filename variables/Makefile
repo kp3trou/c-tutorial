@@ -1,11 +1,10 @@
 
-
-a:a.c
-	gcc a.c -o a 
+variables:variables.c
+	gcc variables.c -o variables
 
 run:
-	./a
+	./variables
 
 clean:
-	rm a
+	rm variables
 

@@ -2,9 +2,6 @@
 
 typedef int INT;
 
-
-
-
 int main(){
 
 	// Section 1
@@ -67,7 +64,7 @@ int main(){
 	intb = 2;
 	printf("inta is : %d , intb is : %d\n",inta,intb);
 
-	printf("There are a lot more to discover at the previous sectors...\n");
+	printf("There are a lot more to discover at the previous sections...\n");
 
 	return 0;
 }
