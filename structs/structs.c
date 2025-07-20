@@ -38,9 +38,7 @@ struct my_struct {
 void print_part (struct part p);
 struct part build_part(double number,int z);
 
-
 int main(){
-
 	// Section 1
 	/*
 	Struct is a data structure.
@@ -66,11 +64,11 @@ int main(){
 	s1.grade = 19.0;
 	printf("%.2f\n",s1.grade);
 	// Memory addresses of struct members (continuous memory addresses).
-    printf("Address of s1: %p\n", (void*)&s1);
-    printf("Address of s1.first_name: %p\n", (void*)&s1.first_name);
-    printf("Address of s1.last_name: %p\n", (void*)&s1.last_name);
-    printf("Address of s1.year: %p\n", (void*)&s1.year);
-    printf("Address of s1.grade:  %p\n\n", (void*)&s1.grade);
+	printf("Address of s1: %p\n", (void*)&s1);
+	printf("Address of s1.first_name: %p\n", (void*)&s1.first_name);
+	printf("Address of s1.last_name: %p\n", (void*)&s1.last_name);
+	printf("Address of s1.year: %p\n", (void*)&s1.year);
+	printf("Address of s1.grade:  %p\n\n", (void*)&s1.grade);
 	// Part as typedef
 	Part part1,part2;
 	part1.a = 1;
@@ -119,4 +117,6 @@ struct part build_part(double number,int z){
 	p3.j = z;
  	return p3;
 }
+
+
 
