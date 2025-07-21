@@ -98,7 +98,14 @@ int main(){
 	struct my_struct st;
 	strcpy(st.name.first_name,"george");
 	st.w = 2025;
-	printf("%s , %d \n",st.name.first_name,st.w); 
+	printf("%s , %d \n\n",st.name.first_name,st.w); 
+
+	// Section 5
+	// Arrays as structs
+	struct part inventory[5];
+	inventory[0].k = 10.23;
+	inventory[0].j = 12;
+	print_part(inventory[0]);
 
 	printf("\n\nThere are a lot more to discover at the previous sections...\n");
 	return 0;
