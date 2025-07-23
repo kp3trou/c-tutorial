@@ -14,7 +14,8 @@ int main(){
 	// Section 1
 	double d = 10.2;
 	double d2 = 5.2;
-	double avg  = average(d,d2); // here d and d2 called arguments
+	// here d and d2 called arguments.The effect of call average(d,d2) is to copy the values of d and d2 into the parameters a and b.
+	double avg  = average(d,d2); 
 	printf("average is : %.4f\n",avg);
 	print();
 	(void)print();
@@ -26,7 +27,7 @@ int main(){
 
 	// Section 2
 	int ar[] = {1,2,3,4,5,6};
-	printf("sum is : %d \n",sum_array(ar,SIZE));// pass by value
+	printf("sum is : %d \n",sum_array(ar,SIZE));// pass by reference and by value
 
 	mod_array (ar, SIZE); // pass by reference
 	for (int i = 0; i < SIZE ; i++)
