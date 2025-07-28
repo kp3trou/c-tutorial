@@ -195,9 +195,33 @@ int main(){
 
 	// Constants and pointers
 	// we use const if the value of the variable is read only(cannot modify it)
+	// pointers to a constant variable
+	
+	int w = 5;
+	const int limit = 500;
+	int *ptr;
+	const int *pc2;// pointer to a constant integer
+	ptr = &num;
+	pc2 = &limit;
+	printf("w - address: %p value: %d\n",&w, w);
+ 	printf("limit - address: %p value: %d\n",&limit, limit);
+ 	printf("ptr - address: %p value: %p\n",&ptr, ptr);
+ 	printf("pc2 - address: %p value: %p\n",&pc2, pc2);
+	//*pc2 = 1000;// error, cannot modify const integer.
+
+	int x2 = 400;
+	const int *cx2 = &x2;
+	//*cx2 = 700;// error, cannot modify through cx2 pointer
+	x2 = 700;// modified because x2 is not const
+
+	const int x3 = 800;
+	//int *cx3 = &x3;// compiler error.
+	const int *cx3 = &x3;
+
+	// Constant pointers
 	// to be continued ...
-	
-	
+
+
 		
 	printf("\n\nThere are a lot more to discover at the previous sections...\n\n");
 	return 0;
