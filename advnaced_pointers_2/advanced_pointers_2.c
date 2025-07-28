@@ -139,12 +139,66 @@ int main(){
 	int nu = 5;
 	void *pvi = &nu;
 	printf("%p\n",(int*)pvi);// use this (recommended)
-	printf("%p\n",pvi);
+	printf("%p\n\n\n",pvi);
 	pvi = pvi+1;// Syntax warning is some compilers, don't use this.
 	
-	// Subtracking 2 pointers
-	// to be continued ...
+	// Subtracting an integer from a pointer
+	int vec[] = {28,41,7};
+	printf("%p\n",(void*)vec);// v behaves as &v[0], like pointer to this element.
+	printf("%p\n",(void*)&vec);
+	printf("%p\n\n",(void*)&vec[0]);
+	int *pvec = vector + 2;
+	printf("%d\n",*pvec);
+	pvec--;
+	printf("%d\n",*pvec);
+	pvec--;
+	printf("%d\n",*pvec);
 
+	// Subtracting 2 pointers
+	int vec2[] = {28, 41, 7};
+	int *p0 = vec2;
+	int *p1 = vec2+1;
+	int *p2 = vec2+2;
+	printf("%p\n",(void*)p0);
+	printf("%p\n",(void*)p1);
+	printf("%p\n",(void*)p2);
+	printf("p2-p0: %d\n",p2-p0); // p2-p0: 2
+	printf("p2-p1: %d\n",p2-p1); // p2-p1: 1
+	printf("p0-p1: %d\n\n",p0-p1); // p0-p1: -1
+
+	// Array of strings
+	char *titles[] = {
+		"A Tale of Two Cities",
+		"Wuthering Heights",
+		"Don Quixote",
+		"Odyssey",
+		"Moby-Dick",
+		"Hamlet",
+		"Gulliver's Travels"
+	};
+	for(int i = 0; i<7; i++)
+		printf("%s\n",titles[i]);
+	
+	char **bestBooks[3];
+	char **englishBooks[4];
+
+	bestBooks[0] = &titles[0];
+	for (int i =0;i<6;i++)
+		printf("%c\n",(*bestBooks[0])[i]);// print first 6 characters from bestBooks[0]
+	bestBooks[1] = &titles[3];
+	bestBooks[2] = &titles[5];
+	englishBooks[0] = &titles[0];
+	englishBooks[1] = &titles[1];
+	englishBooks[2] = &titles[5];
+	englishBooks[3] = &titles[6];
+	printf("\n%s\n\n",*englishBooks[1]);
+
+	// Constants and pointers
+	// we use const if the value of the variable is read only(cannot modify it)
+	// to be continued ...
+	
+	
+		
 	printf("\n\nThere are a lot more to discover at the previous sections...\n\n");
 	return 0;
 }
