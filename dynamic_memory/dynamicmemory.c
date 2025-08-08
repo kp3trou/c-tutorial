@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h> // malloc, calloc, realloc, free.
 
+// function declaration
+int* allocate_array(int size, int value);
+
 int main(){
 
 	// Section 1
@@ -29,9 +32,25 @@ int main(){
 	pii = (int*) malloc(sizeof(int));// lost the memory address
 	printf("%d\n",*pii); 
 	free(pii);// here deallocates the second allocated memory, the first not.Wrong.
-	
+
+	// return pointer from function
+	int* vector = allocate_array(5,45);
+	for(int i = 0; i<5; i++)
+		printf("%d\n",vector[i]);
+	free(vector);
+	// Be careful, don't return pointers from local variables inside a function.
+
 	printf("\n\nThere are a lot more to discover at the previous sections...\n");
 	return 0;
+}
+
+// fill an array with values and returns a pointer to integer
+int* allocate_array(int size, int value) {
+	int* arr = (int*)malloc(size * sizeof(int));
+	for(int i=0; i<size; i++) {
+		arr[i] = value;
+	}
+	return arr;
 }
 
 
