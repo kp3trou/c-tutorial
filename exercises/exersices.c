@@ -8,9 +8,10 @@ int main(){
 	int arr[] = {2,7,11,15};
 	int size = 4;
 	int trg = 18;
-	int rtsize = 0;
+	int rtsize = 2;
 	int* idx = two_sum(arr,size,trg,&rtsize);
-	printf("indices are idx[%d] : %d , idx[%d] : %d\n", 0,1,idx[0],idx[1]);
+	printf("indices are %d and %d\n", idx[0], idx[1]);
+	free(idx);
 	return 0;
 }
 
