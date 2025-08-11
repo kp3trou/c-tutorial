@@ -48,6 +48,64 @@ int main(){
 
 	// pointers and arrays
 	int vector[] = {1,2,3,4,5};
+	int *pv = vector;
+	int *pv2 = &vector[0];
+	printf("%p\n",(void*)vector);
+	printf("%p\n",(void*)&vector[0]);
+	printf("%p\n",(void*)pv);
+	printf("%p\n",(void*)pv2);
+	printf("%d\n",*pv2);
+	pv2++;
+	printf("%d\n",*pv2);
+	printf("%d\n",*(pv));
+	printf("%d\n",*(pv+1));// when adding 1, we add 4 as the size of integer
+	printf("%d\n",*(pv+2));
+	printf("%d\n",*(pv+3));
+	printf("%d\n",*(pv+4));
+	//printf("%d\n",*(pv+10));// undefined behavior, out of bound of the array
+	printf("%d\n",*(vector));
+	printf("%d\n",*(vector+1));// adding 1 at the address of vector
+	printf("%d\n",*(vector+2));
+	printf("%d\n",*(vector+3));
+	printf("%d\n\n\n",*(vector+4));
+	printf("size of array vector is %d bytes\n",sizeof(vector));
+	printf("size of pv pointer is %d\n",sizeof(pv));
+
+	// Section 2
+	// using malloc to create one dimensional array -> at heap memory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
