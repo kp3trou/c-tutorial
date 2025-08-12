@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+// function declaration
+void display_array(int arr[],int size);
+void display_array_2(int *arr,int size);
 
 int main(){
 	// Section 1
@@ -73,47 +76,69 @@ int main(){
 
 	// Section 2
 	// using malloc to create one dimensional array -> at heap memory
+	int *pv3 = (int*)malloc(5*sizeof(int));
+	for(int i = 0;i<5;i++)
+		pv3[i] = i + 1;// same as : *(pv+i) = i+1;
 
+	for(int i = 0;i<5;i++)
+		printf("%d\n\n\n",pv3[i]);
+	free(pv3);
+	
+	// Section 3
+	// Passing one dimensional array to a function
+	// When a one-dimensional array is passed to a function,
+	// the array’s address is passed by value.
+	// 3.1 : using array notation
+	display_array(vector,5);
+	// 3.2 : using pointer notation
+	int *pr = vector;
+	display_array_2(pr,5);
 
+	// create an array of pointers
+	int a = 1;
+	int b = 2;
+	int c = 3;
+	int *pa1 = &a;
+	int *pa2 = &b;
+	int *pa3 = &c;
+	int *ppr[3] = {pa1,pa2,pa3};
+	for(int i = 0;i<3;i++)
+		printf("%d\n",*ppr[i]);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	printf("\n------------------\n\n");
+	int* arr[5];// create an array of integer pointers
+	for (int i=0;i<5;i++){
+		arr[i] = (int*)malloc(sizeof(int));
+		*arr[i] = i;
+	}
+	for(int i = 0;i<5;i++){
+		printf("%d\n",*arr[i]);
+		free(arr[i]);
+	}
+	printf("\n------------------\n\n");
+	// same as above, with pointer arithmetic
+	for (int i=0;i<5;i++){
+		*(arr+i) = (int*)malloc(sizeof(int));
+		**(arr+i) = i;
+	}
+	for(int i = 0;i<5;i++){
+		printf("%d\n",**(arr+i));
+		free(*(arr+i));
+	}
 
 	printf("\n\nThere are a lot more to discover at the previous sections...\n");
 	return 0;
+}
+
+// function that displays an array.Args are that array and it's size.
+void display_array(int arr[],int size){
+	for(int i=0;i<size;i++)
+		printf("%d\n",arr[i]);
+}
+
+// function that displays an array.Args are a pointer and array size.
+void display_array_2(int *arr,int size){
+	for(int i=0;i<size;i++)
+		printf("%d\n",arr[i]);
 }
 
