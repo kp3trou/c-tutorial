@@ -8,7 +8,6 @@ void foobar();
 // global variables
 char* globalheader = "Chapter";
 
-
 int main(){
 	// Section 1
 	printf("%d\n",sizeof(char));
@@ -95,6 +94,76 @@ int main(){
 	printf("%p\n",llheader);
 	printf("%p\n",(void*)globalheader);// Stored at the same address at String Literal Pool
 	foobar();
+	printf("\n------------------\n");
+
+	// Section 3
+	// Standard String Operations: comparing, copying, concatenating
+	// Comparing Strings
+	// prototype: int strcmp(const char *s1, const char *s2);
+	// returns: negative if s1 precedes s2 lexicographically (alphabetically),
+	// 0 if the two strings are equal,
+	// positive if s1 follows s2 lexicographically
+	char command[16] = "Quity";// memory allocation, 16 bytes
+ 	if (strcmp(command, "Quit") == 0){ 
+ 		printf("The command was Quit\n");
+	}
+   	else { 
+ 		printf("The command was not Quit\n");
+		printf("%d\n",strcmp(command, "Qui"));// 't' (116) - '\0' (0) = 116
+	}
+	// if (command == "Quit"){...}, Wrong because command stores memory address of the array.
+
+	// Copying Strings
+	// prototype: char* strcpy(char *s1, const char *s2);
+	char *names[3];// create an array of char* names pointers, 3 pointers
+	char name_1[5] = "John";
+	char name_2[5] = "Paul";
+	char name_3[7] = "George";
+	size_t count = 0;// size_t is unsigned integer
+	names[count] = (char*)malloc(strlen(name_1)+1);
+ 	strcpy(names[count],name_1);
+ 	count++;
+	names[count] = (char*)malloc(strlen(name_2)+1);
+ 	strcpy(names[count],name_2);
+ 	count++;
+	names[count] = (char*)malloc(strlen(name_3)+1);
+	strcpy(names[count],name_3);
+ 	for(int i=0;i<=count;i++){
+		printf("%s\n",(names[i]));
+		free(names[i]);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -112,6 +181,8 @@ void foobar(){
 	printf("foobar, %p\n",(void*)globalheader);// Stored at the same address at String Literal Pool
 	char *s = "Chapter";
 	printf("foobar, %p\n",(void*)s);// String Literal Pool address
+	char local[] = "Chapter";
+	printf("foobar, %p",(void*)local);// stored at foobar stack frame as local array
 }
 
 
