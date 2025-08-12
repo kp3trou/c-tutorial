@@ -115,6 +115,7 @@ int main(){
 
 	// Copying Strings
 	// prototype: char* strcpy(char *s1, const char *s2);
+	// Returns a char* pointer of the first argument
 	char *names[3];// create an array of char* names pointers, 3 pointers
 	char name_1[5] = "John";
 	char name_2[5] = "Paul";
@@ -132,9 +133,11 @@ int main(){
 		printf("%s\n",(names[i]));
 		free(names[i]);
 	}
-
-
-
+	
+	// Concatenating Strings
+	// prototype: char *strcat(char *s1, const char *s2);
+	// returns a pointer to the concatenated results
+	// The function concatenates the second string s2 to the end of the first string s1.	
 
 
 
