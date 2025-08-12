@@ -133,47 +133,27 @@ int main(){
 		printf("%s\n",(names[i]));
 		free(names[i]);
 	}
-	
+	printf("\n\n");	
+
 	// Concatenating Strings
 	// prototype: char *strcat(char *s1, const char *s2);
-	// returns a pointer to the concatenated results
+	// returns a pointer to the concatenated results(pointer to the first string)
 	// The function concatenates the second string s2 to the end of the first string s1.	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	char *error = "ERROR: ";
+	char *errormsg = "Not enough memory";
+	char* buffer = (char*)malloc(strlen(error)+strlen(errormsg)+1);
+	strcpy(buffer,error);
+	strcat(buffer, errormsg);
+	printf("%s\n", buffer);
+	printf("%s\n", error);
+	printf("%s\n", errormsg);
+	printf("%d\n", strlen(buffer));
+	printf("%d\n", strlen(error));
+	printf("%d\n", strlen(errormsg));
+	free(buffer);
+	// the '\0' from error replaced when use strcat(buffer, errormsg),
+	// with the first character of errormsg 'N',
+	// and after put a single '\0' at the end of string buffer.
 
 
 	printf("\n\nThere are a lot more to discover at the previous sections...\n");
@@ -187,8 +167,4 @@ void foobar(){
 	char local[] = "Chapter";
 	printf("foobar, %p",(void*)local);// stored at foobar stack frame as local array
 }
-
-
-
-
 
