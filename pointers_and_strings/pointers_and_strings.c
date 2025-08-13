@@ -166,8 +166,20 @@ int main(){
 	printf("full string: %s\n",b);
 	printf("string lenght: %d\n",strlen(b));
 	free(b);
+	// same logic as above,	using arrays of strings
+	char c3[] = "John ";
+	char d2[] = "Deer";
+	char* b2 = (char*)malloc(strlen(c3) + strlen(d2) + 1);
+	strcpy(b2,c3);
+	strcat(b2,d2);
+	for (int i=0;i<strlen(b2);i++){// if use i<=strlen(b),the last 2 printfs are not at sdtout.
+		printf("%c\n",b2[i]);
+		printf("%c\n",*(b2+i));
+	}
+	printf("full string: %s\n",b2);
+	printf("string lenght: %d\n",strlen(b2));
+	free(b2);
 	
-
 
 
 
