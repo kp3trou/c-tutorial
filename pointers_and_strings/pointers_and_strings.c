@@ -6,6 +6,9 @@
 void foobar();
 void foo(char *a,int print);
 size_t strlength(char* string);
+void foobar2(char* z);
+void foobar3(const char* z);
+void foobar4(int args,char **argv);
 
 // global variables
 char* globalheader = "Chapter";
@@ -191,8 +194,8 @@ int main(){
 	}
 	printf("\n------------------\n");
 	// Section 4
-	// Passing Strings to a function
-	// 4.1: Passing a simple string
+	// 4.1: Passing Strings to a function
+	// Passing a simple string
 	char simplearray[] = "simple string";
 	char *simarr = "hello";	
 	foo(simplearray,0);// turn 0 to 1, if you want to see the chars of that string
@@ -204,11 +207,41 @@ int main(){
 	printf("%d\n",strlength(simpleptr));
 	free(simpleptr);
 
+	printf("\n------------------\n");
+	// Cannot modify this string because of string literal pool
+	char *str = "String";
+	//printf("%s\n",foobar2(str));// segmantation fault 
+	char str2[] = "String";// but this is local main stack frame and can be changed
+	foobar2(str2);
+	printf("%s\n\n\n",str2);// changed the original string
+	// if you don't want to modify the string:
+	char str3[] = "world";
+	//foobar3(str3);// Compiler error because trying to change inside the foobar3 (const arg!).
 
+	// Creation of one dimensional array of string pointers
+	char *s1 = "hello ";
+	char *s2 = "world";
+	char *s3 = "!!!";
+	char *g[3] = {s1,s2,s3};
+	printf("%s\n",g[0]);
+	printf("%s\n",*(g+1));
+	printf("%s\n",*(g+2));
+	// double pointer, pointer to pointer
+	char **fp = g;
+	printf("%s\n",*fp);
+	printf("%s\n",*(fp+1));
+	printf("%s\n",*(fp+2));
+	printf("%s\n",*fp);
+	printf("%s\n",*(++fp));
+	printf("%s\n",*(++fp));
+	fp -= 2;// decrease pointer for 2 memory addresses, because of previous ++fp.	
+	printf("%s\n",fp[0]);
+	printf("%s\n",fp[1]);
+	printf("%s\n",fp[2]);
+	// Passing array of string pointers
+	foobar4(3,g);
 
-
-
-
+	// 4.2: Returning the address of dynamically allocated memory
 
 
 
@@ -254,11 +287,22 @@ size_t strlength(char* string){// char* string same as: char string[]
 	return length;
 }
 
+// modify the first element of the given string
+void foobar2(char* z){
+	z[0] = 'a';
+}
 
+// Trying this to see what happens when trying to change a const variable string
+void foobar3(const char* z){
+	//z[0] = 'a';// Compiler error!Try to change a const string
+}
 
-
-
-
+// Prints the arguments base the number of args
+void foobar4(int args,char **argv){
+	for(int i=0;i<args;i++){
+		printf("argv[%d] %s\n",i,argv[i]);
+	}
+}
 
 
 
