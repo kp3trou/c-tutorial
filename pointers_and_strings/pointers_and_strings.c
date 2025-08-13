@@ -149,11 +149,31 @@ int main(){
 	printf("%s\n", errormsg);
 	printf("%d\n", strlen(buffer));
 	printf("%d\n", strlen(error));
-	printf("%d\n", strlen(errormsg));
+	printf("%d\n\n", strlen(errormsg));
 	free(buffer);
 	// the '\0' from error replaced when use strcat(buffer, errormsg),
 	// with the first character of errormsg 'N',
 	// and after put a single '\0' at the end of string buffer.
+	char* c2 = "John ";
+	char* d = "Deer";
+	char* b = (char*)malloc(strlen(c2) + strlen(d) + 1);
+	strcpy(b,c2);
+	strcat(b,d);
+	for (int i=0;i<strlen(b);i++){// if use i<=strlen(b),the last 2 printfs are not at sdtout.
+		printf("%c\n",b[i]);
+		printf("%c\n",*(b+i));
+	}
+	printf("full string: %s\n",b);
+	printf("string lenght: %d\n",strlen(b));
+	free(b);
+	
+
+
+
+
+
+
+
 
 
 	printf("\n\nThere are a lot more to discover at the previous sections...\n");
