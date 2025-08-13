@@ -4,6 +4,8 @@
 
 // function prototypes
 void foobar();
+void foo(char *a,int print);
+size_t strlength(char* string);
 
 // global variables
 char* globalheader = "Chapter";
@@ -172,14 +174,44 @@ int main(){
 	char* b2 = (char*)malloc(strlen(c3) + strlen(d2) + 1);
 	strcpy(b2,c3);
 	strcat(b2,d2);
+	// strlen works both for char* and char ar[].
 	for (int i=0;i<strlen(b2);i++){// if use i<=strlen(b),the last 2 printfs are not at sdtout.
 		printf("%c\n",b2[i]);
 		printf("%c\n",*(b2+i));
 	}
 	printf("full string: %s\n",b2);
-	printf("string lenght: %d\n",strlen(b2));
+	printf("string lenght: %d\n\n",strlen(b2));
 	free(b2);
-	
+	printf("\n------------------\n");
+	// simple second way to print a string, need for next.
+	char *f = "hello";
+	while(*f){
+		printf("%c\n",*f);
+		f++;
+	}
+	printf("\n------------------\n");
+	// Section 4
+	// Passing Strings to a function
+	// 4.1: Passing a simple string
+	char simplearray[] = "simple string";
+	char *simarr = "hello";	
+	foo(simplearray,0);// turn 0 to 1, if you want to see the chars of that string
+	foo(simarr,0);
+	printf("%d\n",strlength(simplearray));
+	printf("%d\n",strlength(&simplearray[0]));
+	char *simpleptr = (char*)malloc(strlen("simple string")+1);
+	strcpy(simpleptr, "simple string");
+	printf("%d\n",strlength(simpleptr));
+	free(simpleptr);
+
+
+
+
+
+
+
+
+
 
 
 
@@ -192,6 +224,7 @@ int main(){
 	return 0;
 }
 
+// Only printing
 void foobar(){
 	printf("foobar, %p\n",(void*)globalheader);// Stored at the same address at String Literal Pool
 	char *s = "Chapter";
@@ -199,4 +232,36 @@ void foobar(){
 	char local[] = "Chapter";
 	printf("foobar, %p",(void*)local);// stored at foobar stack frame as local array
 }
+
+// print a simple string-optional print the chars of the string
+void foo(char *a,int print){
+	printf("%s\n\n",a);
+	if(print){
+		for(int i =0;i<strlen(a);i++){
+			printf("%c\n",a[i]);
+		}
+	}
+}
+
+// return the lenght of the string that pass as argument, arg is char*
+size_t strlength(char* string){// char* string same as: char string[]
+	size_t length = 0;
+	//printf("function, %s\n",string);
+	while(*(string++)){
+		length++;
+	}
+	//printf("function, %d\n",length);
+	return length;
+}
+
+
+
+
+
+
+
+
+
+
+
 
