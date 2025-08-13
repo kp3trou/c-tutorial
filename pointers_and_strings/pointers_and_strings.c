@@ -241,13 +241,7 @@ int main(){
 	// Passing array of string pointers
 	foobar4(3,g);
 
-	// 4.2: Returning the address of dynamically allocated memory
-
-
-
-
-
-
+	// 4.2: Returning Strings
 
 
 
