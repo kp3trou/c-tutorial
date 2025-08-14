@@ -2,13 +2,19 @@
 #include <stdlib.h>
 #include <string.h>
 
-// function prototypes
+#define MAX_TAB_LENGTH 32
+
+// function prototypes/declarations
 void foobar();
 void foo(char *a,int print);
 size_t strlength(char* string);
 void foobar2(char* z);
 void foobar3(const char* z);
 void foobar4(int args,char **argv);
+char* returnaliteral(int code);
+char* staticformat(const char* name, size_t quantity, size_t weight);
+char* blanks(int number);
+char* blanks_2(int number);
 
 // global variables
 char* globalheader = "Chapter";
@@ -240,12 +246,43 @@ int main(){
 	printf("%s\n",fp[2]);
 	// Passing array of string pointers
 	foobar4(3,g);
-
+	printf("\n------------------\n");
 	// 4.2: Returning Strings
+	// When a function returns a string, it returns the address of the string.
+	// The main concern is to return a valid string address. 
+	// To do this, we can return a reference to either:
+	// A literal,
+	// Dynamically allocated memory,
+	// A local string variable.
+	// 4.2.1: Returning the Address of a Literal
+	printf("%p\n",(void*)returnaliteral(100));
+	printf("%s\n",returnaliteral(100));
+	char* lit = returnaliteral(200);
+	printf("%p\n",(void*)lit);
+	printf("%s\n",lit);
 
+	// What happens here and why ?
+	char* part1 = staticformat("Axle",25,45);
+	char* part2 = staticformat("Piston",55,5);
+	printf("%s\n",part1);
+	printf("%s\n",part2);// the last call overwrote the first call's results
+	printf("\n------------------\n");
 
+	// 4.2.2: Returning the Address of dynamically allocated memory
+	char* dstr = blanks(4);	
+	printf("tme memory address of dynamically allocated is: %p\n",(void*)dstr);
+	printf("there are %d blanks !\n",strlen(dstr));
+	printf("inside here are blanks-> [%s] \n",dstr);
+	free(dstr);// deallocation outside the function
+	printf("\n------------------\n");
 
-
+	// 4.2.3: Returning the Address of a local string
+	// This is not a good practise and don't use it.
+	// Check the eaxmple bellow and go the blanks_2 definition to see how to do this example.
+	//char* locstr = blanks_2(5);// Compiler Warning !!!
+	// The address of the local variable inside the function's call is lost,
+	// because the function's stack frame is lost before assigned that address
+	// to main's locstr.
 
 	printf("\n\nThere are a lot more to discover at the previous sections...\n");
 	return 0;
@@ -298,8 +335,49 @@ void foobar4(int args,char **argv){
 	}
 }
 
+// Returns the address of a literal
+char* returnaliteral(int code) {
+	switch(code) {
+		case 100:
+			return "Boston Processing Center";
+		case 200:
+			return "Denver Processing Center";
+		case 300:
+			return "Atlanta Processing Center";
+		case 400:
+			return "San Jose Processing Center"; 
+		}
+}
 
+// Be careful when using static strings, here as returning the static buffer
+char* staticformat(const char* name, size_t quantity, size_t weight) {
+	static char buffer[64]; // Assume to be large enough
+	sprintf(buffer, "Item: %s Quantity: %u Weight: %u",
+	name, quantity, weight);
+	return buffer;
+}
 
+// returns the memory address of dynamically allocated memory
+char* blanks(int number) {
+	char* spaces = (char*) malloc(number + 1);
+	int i; 
+	for (i = 0; i<number; i++) {
+		spaces[i] = ' ';
+	}
+ 	spaces[number] = '\0';// put at the last element the NUL character
+ 	return spaces;
+}
 
+// Returns the memeory address of a locally string.Wrong, for educationall only.
+char* blanks_2(int number) {
+	char spaces[MAX_TAB_LENGTH];
+	int i;
+	for (i = 0; i < number && i < MAX_TAB_LENGTH; i++) {
+		spaces[i] = ' ';
+	}
+	spaces[i] = '\0';
+	return 0;// for see compiler warning,comment this line and uncomment the next line.
+	//return spaces;
+}
 
 
