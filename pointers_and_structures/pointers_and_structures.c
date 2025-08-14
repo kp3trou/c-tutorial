@@ -30,9 +30,24 @@ int main(){
 	p1.firstname = "John";
 	p1.lastname = "Deer";
 	p1.age = 23;
+	p1.title = "Operating Systems";
 	printf("%s\n",p1.firstname);
 	printf("%s\n",p1.lastname);
-	printf("%d\n\n",p1.age);
+	printf("%d\n",p1.age);
+	printf("%s\n",p1.title);
+	printf("address of pointer is %p\n",(void*)&p1);
+	printf("address of pointer %p\n",(void*)&p1.firstname);// 8 bytes of pointer char* size
+	printf("address of pointer %p\n",(void*)&p1.lastname);// 8 bytes of pointer char* size
+	printf("address of pointer %p\n",(void*)&p1.title);// 8 bytes of of pointer char* size
+	printf("address of pointer %p\n\n",(void*)&p1.age);// 4 bytes of integer size
+	printf("struct members are in continuous memory addresses in stack frame.\n\n");
+	printf("the size of the struct is %d bytes\n",sizeof(p1));
+	printf("4 bytes extra memory for padding inside the struct\n");
+
+	//the following memory addresses is outside stack frame, at String Literal Pool.
+	printf("address that pointer points is %p\n",(void*)p1.firstname);// read-only memomory
+	printf("address that pointer points is  %p\n",(void*)p1.lastname);// read-only memomory
+	printf("address that pointer points is %p\n",(void*)p1.title);// read-only memory
 
 	// Also we can use typedef for struct declaration
 	Person person;// variable person creation, create an instance of a Person
@@ -62,6 +77,13 @@ int main(){
 	printf("%s\n",ptrperson2->firstname);
 	free((*ptrperson2).firstname);
 	free(ptrperson2);
+
+	// Section 2
+	// How memory allocates for a structure
+
+
+
+
 
 
 	printf("\n\nThere are a lot more to discover at the previous sections...\n");
