@@ -368,7 +368,7 @@ char* blanks(int number) {
  	return spaces;
 }
 
-// Returns the memeory address of a locally string.Wrong, for educationall only.
+// Returns the memory address of a locally string.Wrong, for educationall only.
 char* blanks_2(int number) {
 	char spaces[MAX_TAB_LENGTH];
 	int i;
