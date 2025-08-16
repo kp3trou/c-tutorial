@@ -32,6 +32,7 @@ void initialize_person(Person *person, const char* fn,const char* ln, const char
 void process_person();
 void deallocate_person(Person *person);
 void print_object (Person *person);
+void process_person_2();
 
 int main(){
 	// Section 1
@@ -160,7 +161,7 @@ int main(){
 	***********/
 
 	// Dynamic objects -> structs are in heap memory
-
+	process_person_2();
 
 
 	printf("\n\nThere are a lot more to discover at the previous sections...\n");
@@ -180,6 +181,7 @@ void initialize_person(Person *person, const char* fn,const char* ln, const char
 	person->age = age;
 }
 
+// creates static object struct at stack frame (process_person stack's frame).
 void process_person(){
 	Person person;
 	initialize_person(&person, "John", "Deer", "Manager", 40);
@@ -200,13 +202,18 @@ void print_object (Person *person){
 	printf("%s\n",person->lastname);
 	printf("%s\n",person->title);
 	printf("%d\n",person->age);
+	printf("\n-----------------\n");
 }
 
-
-
-
-
-
+// creates dynamic objects structs in heap.
+void process_person_2(){
+	Person *ptrperson;
+	ptrperson = (Person*)malloc(sizeof(Person));
+	initialize_person(ptrperson, "George", "Korba", "Assistant", 39);
+	print_object(ptrperson);
+	deallocate_person(ptrperson);
+	free(ptrperson);
+}
 
 
 
