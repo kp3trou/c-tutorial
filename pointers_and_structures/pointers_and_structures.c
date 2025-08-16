@@ -168,7 +168,7 @@ int main(){
 	return 0;
 }
 
-
+/***  functions definition  ***/
 
 // function for initiallization of a struct
 void initialize_person(Person *person, const char* fn,const char* ln, const char* title, uint age) {
@@ -214,11 +214,5 @@ void process_person_2(){
 	deallocate_person(ptrperson);
 	free(ptrperson);
 }
-
-
-
-
-
-
 
 
