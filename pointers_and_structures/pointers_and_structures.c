@@ -20,6 +20,18 @@ typedef struct person_2{
 	unsigned int age;
 }Person;
 
+typedef struct alternatePerson {
+	char* firstname;
+	char* lastname;
+	char* title;
+	short age; 
+} AlternatePerson;
+
+// function declaration
+void initialize_person(Person *person, const char* fn,const char* ln, const char* title, uint age);
+void process_person();
+void deallocate_person(Person *person);
+void print_object (Person *person);
 
 int main(){
 	// Section 1
@@ -78,16 +90,128 @@ int main(){
 	free((*ptrperson2).firstname);
 	free(ptrperson2);
 
+	printf("\n-----------------\n");
 	// Section 2
 	// How memory allocates for a structure
+	Person person2;
+	printf("%d\n",sizeof(person2)); // Displays 32
+	AlternatePerson otherperson;
+	printf("%d\n",sizeof(otherperson)); // Displays 32,why? same as above, because of padding.
+	printf("%p\n",(void*)&otherperson);
+	printf("%p\n",(void*)&otherperson.firstname);
+	printf("%p\n",(void*)&otherperson.lastname);
+	printf("%p\n",(void*)&otherperson.title);
+	printf("%p\n\n",(void*)&otherperson.age);
+	
+	// dynamic allocate memory inside a struct
+	struct person p2;// memory of p2 deallocates from stack inside main automatically
+	p2.firstname = (char*)malloc(strlen("Emily")+1);
+	strcpy(p2.firstname,"Emily");
+	printf("%s\n\n",p2.firstname);
+	free(p2.firstname);// must deallocate the memory because is at heap
 
+	// create a struct at dynamic allocate memory -> heap
+	struct person *p3 = (struct person*)malloc(sizeof(struct person));
+	printf("%d\n",sizeof(struct person));// size of the struct	
+	printf("%d\n",sizeof(p3));// size of the pointer
+	p3->firstname = (char*)malloc(strlen("Emily")+1);
+	strcpy(p3->firstname,"Emily");
+	printf("%s\n\n",p3->firstname);
+	free(p3->firstname);// first deallocate nested dynamic memory
+	free(p3);// at the end deallocate the struct's dynamic memory
 
+	Person *p4 = malloc(sizeof(Person));// p4 is in stack and points at struct.
+										// Struct is in heap.
+	//Person *p4 = (Person*)malloc(sizeof(Person));// same as above.
+	initialize_person(p4,"Peter","Underwood","Manager",36);
+	printf("%s\n",p4->firstname);
+	printf("%s\n",p4->lastname);
+	printf("%s\n",p4->title);
+	printf("%d\n\n",p4->age);
+	free(p4->firstname);
+	free(p4->lastname);
+	free(p4->title);
+	free(p4);
 
+	Person p5;// p5 and struct are in main stack frame,no need for free.Only for members of struct.
+	initialize_person(&p5,"Peter","Underwood","Manager",36);
+	printf("%s\n",p5.firstname);
+	printf("%s\n",p5.lastname);
+	printf("%s\n",p5.title);
+	printf("%d\n\n",p5.age);
+	free(p5.firstname);
+	free(p5.lastname);
+	free(p5.title);
+	
+	printf("\n-----------------\n");
+
+	// Static objects -> structs are in stack memory
+	process_person();// creates a struct object at process_person stack frame.No dynamic memory.
+					 // Deallocation from stack memory the struct.Automatically.
+					 // Only members of the struct deallocation dynamically using free().
+
+	/*********** Be careful :
+	
+	Person p6;// creates a struct Person at the stack.
+	Person *p7;// creates a pointer that points to struct Person.Mo members, nothing.
+	Person *p8 = malloc(sizeof(Person));// creates a struct at heap and pointer at stack.
+	free(p8); // needs free.
+
+	***********/
+
+	// Dynamic objects -> structs are in heap memory
 
 
 
 	printf("\n\nThere are a lot more to discover at the previous sections...\n");
 	return 0;
 }
+
+
+
+// function for initiallization of a struct
+void initialize_person(Person *person, const char* fn,const char* ln, const char* title, uint age) {
+	person->firstname = (char*) malloc(strlen(fn) + 1);
+	strcpy(person->firstname, fn);
+	person->lastname = (char*) malloc(strlen(ln) + 1);
+	strcpy(person->lastname, ln);
+	person->title = (char*) malloc(strlen(title) + 1);
+	strcpy(person->title, title);
+	person->age = age;
+}
+
+void process_person(){
+	Person person;
+	initialize_person(&person, "John", "Deer", "Manager", 40);
+	print_object(&person);
+	deallocate_person(&person);
+}
+
+// deallocation from stack.Arg1 is a pointer to an object type Person.
+void deallocate_person(Person *person) {
+	free(person->firstname);
+	free(person->lastname);
+	free(person->title);
+}
+
+// only for print object members.Arg1 is a pointer to an object type Person.
+void print_object (Person *person){
+	printf("%s\n",person->firstname);
+	printf("%s\n",person->lastname);
+	printf("%s\n",person->title);
+	printf("%d\n",person->age);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
