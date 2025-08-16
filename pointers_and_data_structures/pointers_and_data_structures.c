@@ -21,7 +21,8 @@ int main(){
 	void (*fptr)(char* s);// local function pointer fptr declaration
 	//void (*fptr)(char*);// same as above
 	printf("memory address of function pointer fptr points is %p\n",(void*)fptr);
-	printf("memory address of function foo is %p\n",(void*)foo);
+	printf("memory address of function foo is %p\n",(void*)foo);// address is at Code/Text segment.
+	// The memory address of a function is read-only memory.
 	fptr = foo;// the name of a function acts as a pointer.
 	//fptr = &foo;// same as the above.
 	printf("memory address of function pointer fptr points is %p\n",(void*)fptr);
