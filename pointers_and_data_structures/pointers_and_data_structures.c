@@ -21,7 +21,7 @@ typedef struct node {
 	struct node *next;// pointer to the next node
 } Node;
 
-// hold's pointers to the haid and tail.
+// hold's pointers to the head and tail.
 typedef struct linkedlist {
 	Node *head;// pointer to Node struct at head
 	Node *tail;// pointer to Node struct at tail
@@ -44,8 +44,6 @@ void add_tail(LinkedList *list, void* data);
 Node *get_node(LinkedList *list, COMPARE compare , void* data);
 void delete(LinkedList *list, Node *node);
 void display_linked_list(LinkedList *list, DISPLAY display);
-
-
 
 int main(){		
 	// Section 0
@@ -142,12 +140,6 @@ int main(){
  	delete(&linkedList, node);
 
 	display_linked_list(&linkedList, (DISPLAY)display_employee);
-
-
-
-
-
-
 
 
 	printf("\n\nThere are a lot more to discover at the previous sections...\n");
@@ -300,26 +292,4 @@ void display_linked_list(LinkedList *list, DISPLAY display) {
  		current = current->next;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
