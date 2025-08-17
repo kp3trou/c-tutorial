@@ -2,21 +2,32 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+
+typedef struct employee{
+	char name[32];
+	unsigned char age;
+} Employee;
+
+
 // functions declarations
 void foo(char* s);
 int add(int a, int b);
 int subtract(int a, int b);
 void calc(int a, int b, int (*op)(int, int));
 int sum(int x, int y);
+int compare_employee(Employee *e1, Employee *e2);
+void display_employee(Employee* employee);
+
+// Global declaration function pointers
+typedef void(*DISPLAY)(void*);// refers to display_employee()
+typedef int(*COMPARE)(void*,void*);// refers to compare_employee()
 
 
 int main(){
-	// Section 1
-	// Pointers and Data structures
-	// Data Structures are ways to organise and store data in memory.
-	// Examples: array, Linked List, Queue, Stack,Tree.
-	// 1.1: Linked List
-
+		
+	// Section 0
+	// Introduction Function Pointers	
 	// Some function pointer examples, because we are going to use them.	
 	void (*fptr)(char* s);// local function pointer fptr declaration
 	//void (*fptr)(char*);// same as above
@@ -39,6 +50,50 @@ int main(){
 	int y = (*fn)(12,11);// (*fn) same as fn.
 	printf("%d\n",x);
 	printf("%d\n",y);
+
+	// Section 1
+	// Pointers and Data structures
+	// Data Structures are ways to organise and store data in memory.
+	// Examples: array, Linked List, Queue, Stack,Tree.
+	// 1.1: Linked List
+	// A linked list consists of nodes connected to one another.
+	// Each node will hold usersupplied data.
+	// 1.1.1: Single Linked List
+	// A linked list is a data structure that consists of a series of nodes interconnected with
+	// links. Typically, one node is called the head node and subsequent nodes follow the head,
+	// one after another. The last node is called the tail. The links connecting the nodes are
+	// easily implemented using a pointer. Each node can be dynamically allocated as needed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	printf("\n\nThere are a lot more to discover at the previous sections...\n");
@@ -69,6 +124,28 @@ void calc(int a, int b, int (*op)(int, int)) {
 int sum(int x, int y){
 	return x+y;
 }
+
+// Returns 0,-1,1.Arguments are pointers to struct Employee.
+int compare_employee(Employee *e1, Employee *e2) {
+	return strcmp(e1->name, e2->name);
+}
+
+// Display a single employee.Argument is a pointer to struct Employee.
+void display_employee(Employee* employee) {
+	printf("%s\t%d\n", employee->name, employee->age);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
